@@ -1,6 +1,5 @@
 import { getTrending } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
-import Navbar from '@/components/Navbar'
 
 const CATEGORIES = [
   { label: 'Trending', query: '' },
@@ -34,7 +33,6 @@ export default async function Home({
 
   return (
     <>
-      <Navbar />
       <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Category pills */}
         <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
