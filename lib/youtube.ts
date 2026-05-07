@@ -1,47 +1,105 @@
+/**
+ * YouTube Data API v3 wrapper — with quota guard + response cache.
+ *
+ * Quota costs (per call):
+ *   search.list      = 100 units  ← expensive, cache aggressively
+ *   videos.list      =   1 unit
+ *   channels.list    =   1 unit
+ *
+ * Daily budget: 10,000 units (free tier)
+ * Safety limit:  8,000 units (leaves 2K headroom)
+ *
+ * Cache: Next.js fetch cache (revalidate per call type)
+ *   trending  → 30 min
+ *   search    → 2 hours  (most expensive — reuse heavily)
+ *   video     → 1 hour
+ *   channel   → 6 hours
+ */
+
 const API_KEY = process.env.YOUTUBE_API_KEY
 const BASE    = 'https://www.googleapis.com/youtube/v3'
 
+// ── Quota costs ────────────────────────────────────────────────────────────────
+const QUOTA_COST = {
+  search:   100,
+  videos:   1,
+  channels: 1,
+} as const
+
+// ── Daily budget guard (in-memory per serverless instance) ────────────────────
+// Not perfect across instances but prevents single-instance runaway usage.
+// For true cross-instance tracking, use Redis/KV — overkill for free tier.
+const DAILY_BUDGET = 8000
+let _usedToday   = 0
+let _resetDay    = todayStr()
+
+function todayStr() { return new Date().toISOString().slice(0, 10) }
+
+function checkAndCharge(units: number, endpoint: string): void {
+  const today = todayStr()
+  if (today !== _resetDay) { _usedToday = 0; _resetDay = today } // new day reset
+  if (_usedToday + units > DAILY_BUDGET) {
+    throw new Error(`YouTube quota limit reached (${_usedToday}/${DAILY_BUDGET} units used today). Try again tomorrow.`)
+  }
+  _usedToday += units
+  console.log(`[yt] ${endpoint} -${units} units | used today: ${_usedToday}/${DAILY_BUDGET}`)
+}
+
+// ── Types ─────────────────────────────────────────────────────────────────────
 export interface YTVideo {
-  id: string
-  title: string
-  description: string
-  thumbnail: string
+  id:           string
+  title:        string
+  description:  string
+  thumbnail:    string
   channelTitle: string
-  channelId: string
-  publishedAt: string
-  viewCount: string
-  likeCount: string
-  duration: string
+  channelId:    string
+  publishedAt:  string
+  viewCount:    string
+  likeCount:    string
+  duration:     string
 }
 
 export interface YTChannel {
-  id: string
-  title: string
-  thumbnail: string
+  id:              string
+  title:           string
+  thumbnail:       string
   subscriberCount: string
-  videoCount: string
-  description: string
+  videoCount:      string
+  description:     string
 }
 
-function ytFetch(endpoint: string, params: Record<string, string>) {
+// ── Core fetch — all caching + quota flows through here ───────────────────────
+function ytFetch(
+  endpoint: keyof typeof QUOTA_COST,
+  params: Record<string, string>,
+  revalidateSeconds = 1800,
+) {
+  if (!API_KEY) throw new Error('YOUTUBE_API_KEY not set')
+  checkAndCharge(QUOTA_COST[endpoint], endpoint)
+
   const url = new URL(`${BASE}/${endpoint}`)
-  url.searchParams.set('key', API_KEY!)
+  url.searchParams.set('key', API_KEY)
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v)
-  return fetch(url.toString(), { next: { revalidate: 300 } })
+
+  return fetch(url.toString(), { next: { revalidate: revalidateSeconds } })
 }
 
+// ── Public API ────────────────────────────────────────────────────────────────
+
+/** Trending videos — 1 unit, cache 30 min */
 export async function getTrending(maxResults = 24, regionCode = 'US'): Promise<YTVideo[]> {
   const r = await ytFetch('videos', {
     part: 'snippet,statistics,contentDetails',
     chart: 'mostPopular',
     regionCode,
     maxResults: String(maxResults),
-  })
+  }, 1800)
   if (!r.ok) throw new Error(`YouTube trending: ${r.status}`)
   const data = await r.json() as { items: RawVideo[] }
   return data.items.map(parseVideo)
 }
 
+/** Search — 100 units, cache 2 hours */
 export async function searchVideos(query: string, maxResults = 24): Promise<YTVideo[]> {
   const searchRes = await ytFetch('search', {
     part: 'snippet',
@@ -49,7 +107,7 @@ export async function searchVideos(query: string, maxResults = 24): Promise<YTVi
     type: 'video',
     maxResults: String(maxResults),
     order: 'relevance',
-  })
+  }, 7200)  // 2h cache — search is expensive
   if (!searchRes.ok) throw new Error(`YouTube search: ${searchRes.status}`)
   const searchData = await searchRes.json() as { items: Array<{ id: { videoId: string }; snippet: RawSnippet }> }
   const ids = searchData.items.map(i => i.id.videoId).join(',')
@@ -57,11 +115,12 @@ export async function searchVideos(query: string, maxResults = 24): Promise<YTVi
   return getVideosByIds(ids)
 }
 
+/** Video detail by IDs — 1 unit, cache 1 hour */
 export async function getVideosByIds(ids: string): Promise<YTVideo[]> {
   const r = await ytFetch('videos', {
     part: 'snippet,statistics,contentDetails',
     id: ids,
-  })
+  }, 3600)
   if (!r.ok) throw new Error(`YouTube videos: ${r.status}`)
   const data = await r.json() as { items: RawVideo[] }
   return data.items.map(parseVideo)
@@ -72,14 +131,14 @@ export async function getVideoById(id: string): Promise<YTVideo | null> {
   return vids[0] ?? null
 }
 
+/** Related videos (search proxy — 100 units, cache 2 hours) */
 export async function getRelatedVideos(videoId: string, maxResults = 12): Promise<YTVideo[]> {
-  // Search by video title as proxy (related videos endpoint deprecated)
   const r = await ytFetch('search', {
     part: 'snippet',
     relatedToVideoId: videoId,
     type: 'video',
     maxResults: String(maxResults),
-  })
+  }, 7200)
   if (!r.ok) return []
   const data = await r.json() as { items: Array<{ id: { videoId: string } }> }
   const ids = data.items.map(i => i.id.videoId).filter(Boolean).join(',')
@@ -87,23 +146,29 @@ export async function getRelatedVideos(videoId: string, maxResults = 12): Promis
   return getVideosByIds(ids)
 }
 
+/** Channel info — 1 unit, cache 6 hours */
 export async function getChannel(channelId: string): Promise<YTChannel | null> {
   const r = await ytFetch('channels', {
     part: 'snippet,statistics',
     id: channelId,
-  })
+  }, 21600)
   if (!r.ok) return null
   const data = await r.json() as { items: RawChannel[] }
   const ch = data.items[0]
   if (!ch) return null
   return {
-    id: ch.id,
-    title: ch.snippet.title,
-    thumbnail: ch.snippet.thumbnails?.high?.url ?? ch.snippet.thumbnails?.default?.url ?? '',
+    id:              ch.id,
+    title:           ch.snippet.title,
+    thumbnail:       ch.snippet.thumbnails?.high?.url ?? ch.snippet.thumbnails?.default?.url ?? '',
     subscriberCount: ch.statistics?.subscriberCount ?? '0',
-    videoCount: ch.statistics?.videoCount ?? '0',
-    description: ch.snippet.description ?? '',
+    videoCount:      ch.statistics?.videoCount ?? '0',
+    description:     ch.snippet.description ?? '',
   }
+}
+
+/** Current quota usage (for monitoring) */
+export function getQuotaStatus() {
+  return { used: _usedToday, budget: DAILY_BUDGET, remaining: DAILY_BUDGET - _usedToday, date: _resetDay }
 }
 
 // ── Parsers ───────────────────────────────────────────────────────────────────
