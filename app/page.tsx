@@ -34,8 +34,8 @@ export default async function Home({
   return (
     <>
       <div className="noise-overlay" aria-hidden="true" />
-      <div className="orb orb-1" style={{ background: 'radial-gradient(circle, rgba(239,68,68,0.12), transparent 70%)' }} aria-hidden="true" />
-      <div className="orb orb-2" style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.08), transparent 70%)', animationDelay: '-5s' }} aria-hidden="true" />
+      <div className="liquid-blob liquid-blob-1" style={{ background: 'radial-gradient(circle, rgba(239,68,68,0.12), transparent 70%)' }} aria-hidden="true" />
+      <div className="liquid-blob liquid-blob-2" style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.08), transparent 70%)', animationDelay: '-5s' }} aria-hidden="true" />
       <main className="max-w-7xl mx-auto px-4 py-6 relative z-10">
         {/* Category pills */}
         <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
