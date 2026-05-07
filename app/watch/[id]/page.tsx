@@ -1,6 +1,7 @@
 import { getVideoById, getRelatedVideos, formatViews, timeAgo } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
 import Navbar from '@/components/Navbar'
+import AISummary from '@/components/AISummary'
 import { notFound } from 'next/navigation'
 
 export default async function WatchPage({
@@ -55,6 +56,12 @@ export default async function WatchPage({
                     <span>👍 {parseInt(video.likeCount).toLocaleString()}</span>
                   </div>
                 </div>
+                <AISummary
+                  videoId={id}
+                  title={video.title}
+                  channel={video.channelTitle}
+                  description={video.description}
+                />
                 {video.description && (
                   <p className="text-sm text-gray-400 line-clamp-3 bg-gray-900 rounded-xl p-4">
                     {video.description}
