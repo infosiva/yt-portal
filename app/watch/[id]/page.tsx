@@ -1,7 +1,8 @@
-import { getVideoById, getRelatedVideos, formatViews, timeAgo } from '@/lib/youtube'
+import { getVideoById, searchVideos, formatViews, timeAgo } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
 import Navbar from '@/components/Navbar'
 import AISummary from '@/components/AISummary'
+import EmbedPlayer from '@/components/EmbedPlayer'
 import { notFound } from 'next/navigation'
 
 export default async function WatchPage({
@@ -16,10 +17,12 @@ export default async function WatchPage({
 
   try {
     if (process.env.YOUTUBE_API_KEY) {
-      ;[video, related] = await Promise.all([
-        getVideoById(id),
-        getRelatedVideos(id, 12),
-      ])
+      video = await getVideoById(id)
+      // relatedToVideoId is deprecated — use channel/topic search instead
+      if (video) {
+        related = await searchVideos(video.channelTitle, 12).catch(() => [])
+        related = related.filter(v => v.id !== id).slice(0, 12)
+      }
     }
   } catch { /* show notFound */ }
 
@@ -32,15 +35,7 @@ export default async function WatchPage({
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Player */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="aspect-video rounded-xl overflow-hidden bg-black">
-              <iframe
-                src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
-                title={video?.title ?? 'YouTube Video'}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
+            <EmbedPlayer id={id} title={video?.title ?? 'YouTube Video'} thumbnail={video?.thumbnail} />
 
             {video && (
               <div className="space-y-2">

@@ -1,17 +1,23 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import { YTVideo, formatViews, timeAgo } from '@/lib/youtube'
 
 export default function VideoCard({ video }: { video: YTVideo }) {
+  const [imgSrc, setImgSrc] = useState(video.thumbnail)
+  const fallback = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
+
   return (
     <Link href={`/watch/${video.id}`} className="group block">
       <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800">
         <Image
-          src={video.thumbnail}
+          src={imgSrc}
           alt={video.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          onError={() => { if (imgSrc !== fallback) setImgSrc(fallback) }}
         />
         {video.duration && (
           <span className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-mono">
