@@ -5,16 +5,26 @@ import { useState } from 'react'
 import { YTVideo, formatViews, timeAgo } from '@/lib/youtube'
 
 function ChannelAvatar({ name }: { name: string }) {
-  const initials = name.slice(0, 2).toUpperCase()
-  // Deterministic color from channel name
   const hue = name.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % 360
   return (
     <div
-      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
-      style={{ background: `hsl(${hue}, 65%, 45%)` }}
-      aria-hidden="true"
+      style={{
+        width: 36,
+        height: 36,
+        borderRadius: '50%',
+        background: `hsl(${hue}, 65%, 45%)`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        fontSize: '0.8rem',
+        fontWeight: 700,
+        flexShrink: 0,
+        marginTop: 2,
+      }}
+      aria-hidden
     >
-      {initials}
+      {name.slice(0, 2).toUpperCase()}
     </div>
   )
 }
@@ -22,76 +32,85 @@ function ChannelAvatar({ name }: { name: string }) {
 export default function VideoCard({ video, featured = false }: { video: YTVideo; featured?: boolean }) {
   const [imgSrc, setImgSrc] = useState(video.thumbnail)
   const fallback = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
+  const [hovered, setHovered] = useState(false)
 
-  if (featured) {
-    return (
-      <Link href={`/watch/${video.id}`} className="group block relative rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-red-500/50 transition-colors">
-        <div className="relative aspect-video w-full">
-          <Image
-            src={imgSrc}
-            alt={video.title}
-            fill
-            priority
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="100vw"
-            onError={() => { if (imgSrc !== fallback) setImgSrc(fallback) }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          {video.duration && (
-            <span className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg font-mono">
-              {video.duration}
-            </span>
-          )}
-          <div className="absolute bottom-0 left-0 right-0 p-5">
-            <span className="inline-block bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full mb-2 uppercase tracking-wide">Featured</span>
-            <h2 className="text-white text-xl font-bold leading-snug line-clamp-2 mb-2">{video.title}</h2>
-            <div className="flex items-center gap-3">
-              <ChannelAvatar name={video.channelTitle} />
-              <div>
-                <p className="text-gray-200 text-sm font-medium">{video.channelTitle}</p>
-                <p className="text-gray-400 text-xs">{formatViews(video.viewCount)} · {timeAgo(video.publishedAt)}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Link>
-    )
-  }
+  // featured prop kept for backwards compat with watch page — renders same card style
+  void featured
 
   return (
-    <Link href={`/watch/${video.id}`} className="group block">
-      <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 ring-1 ring-transparent group-hover:ring-red-500/30 transition-all duration-200">
+    <Link
+      href={`/watch/${video.id}`}
+      style={{ textDecoration: 'none', display: 'block' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Thumbnail */}
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          aspectRatio: '16/9',
+          borderRadius: hovered ? 0 : 12,
+          overflow: 'hidden',
+          background: '#272727',
+          transition: 'border-radius 0.2s',
+        }}
+      >
         <Image
           src={imgSrc}
           alt={video.title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           onError={() => { if (imgSrc !== fallback) setImgSrc(fallback) }}
+          style={{ transform: hovered ? 'scale(1.03)' : 'scale(1)', transition: 'transform 0.3s' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+
+        {/* Duration */}
         {video.duration && (
-          <span className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm text-white text-xs px-1.5 py-0.5 rounded-md font-mono">
+          <span
+            style={{
+              position: 'absolute',
+              bottom: 6,
+              right: 8,
+              background: 'rgba(0,0,0,0.87)',
+              color: '#fff',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              padding: '1px 5px',
+              borderRadius: 4,
+              letterSpacing: '0.02em',
+              fontFamily: 'monospace',
+            }}
+          >
             {video.duration}
           </span>
         )}
-        {/* Play button on hover */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <div className="w-12 h-12 bg-red-600/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
-            <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
-        </div>
       </div>
-      <div className="mt-3 flex gap-3">
+
+      {/* Info row — avatar + text (exact YouTube layout) */}
+      <div style={{ display: 'flex', gap: 12, paddingTop: 12, paddingBottom: 8 }}>
         <ChannelAvatar name={video.channelTitle} />
-        <div className="flex-1 min-w-0 space-y-0.5">
-          <h3 className="text-sm font-medium leading-snug line-clamp-2 group-hover:text-red-400 transition-colors">
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h3
+            style={{
+              margin: 0,
+              fontSize: '0.9375rem',
+              fontWeight: 500,
+              lineHeight: 1.4,
+              color: '#f1f1f1',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
+              overflow: 'hidden',
+            }}
+          >
             {video.title}
           </h3>
-          <p className="text-xs text-gray-400 truncate">{video.channelTitle}</p>
-          <p className="text-xs text-gray-500">
+          <p style={{ margin: '4px 0 0', fontSize: '0.8125rem', color: '#aaa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {video.channelTitle}
+          </p>
+          <p style={{ margin: '2px 0 0', fontSize: '0.8125rem', color: '#aaa' }}>
             {formatViews(video.viewCount)} · {timeAgo(video.publishedAt)}
           </p>
         </div>

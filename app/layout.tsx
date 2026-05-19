@@ -1,24 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import SharedNavbar from '@/components/SharedNavbar'
-import SharedFooter from '@/components/SharedFooter'
-import DesignEffects from '@/components/DesignEffects'
-import type { BrandConfig } from '@/components/SharedNavbar'
-
-const brand: BrandConfig = {
-  name: 'YT Portal',
-  tagline: 'Trending YouTube videos curated by topic — tech, gaming, music and more.',
-  icon: '▶️',
-  color: '#ef4444',
-  url: 'https://yt-portal.vercel.app',
-  navLinks: [
-    { label: 'Trending', href: '/?cat=Trending' },
-    { label: 'Tech', href: '/?cat=Tech' },
-    { label: 'Gaming', href: '/?cat=Gaming' },
-    { label: 'Music', href: '/?cat=Music' },
-  ],
-  cta: { label: 'Browse →', href: '/' },
-}
+import YTNavbar from '@/components/YTNavbar'
+import YTSidebar from '@/components/YTSidebar'
 
 export const metadata: Metadata = {
   title: 'YT Portal — Trending YouTube Videos by Topic',
@@ -33,19 +16,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <style>{`
+          body { background: #0f0f0f; margin: 0; }
+          .yt-nav-link:hover { background: rgba(255,255,255,0.1) !important; }
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        `}</style>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "YT Portal",
-          "url": brand.url,
-          "description": brand.tagline
+          "url": "https://yt-portal.vercel.app",
         })}} />
       </head>
-      <body className="flex flex-col min-h-screen">
-        <DesignEffects />
-        <SharedNavbar brand={brand} />
-        <main className="flex-1 pt-16">{children}</main>
-        <SharedFooter brand={brand} />
+      <body style={{ background: '#0f0f0f', color: '#fff', fontFamily: 'Roboto,-apple-system,system-ui,sans-serif', minHeight: '100dvh' }}>
+        <YTNavbar />
+        <div style={{ display: 'flex', paddingTop: 56, minHeight: 'calc(100vh - 56px)' }}>
+          <YTSidebar />
+          <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden' }}>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   )
