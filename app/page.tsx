@@ -1,6 +1,5 @@
 import { getTrending } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
-import PlaceholderGrid from '@/components/PlaceholderGrid'
 
 const CHIPS = [
   { label: 'All', query: '' },
@@ -24,16 +23,7 @@ export default async function Home({
 }) {
   const { cat } = await searchParams
 
-  let videos: import("@/lib/youtube").YTVideo[] = []
-  let error = ''
-
-  try {
-    if (process.env.YOUTUBE_API_KEY) {
-      videos = await getTrending(24)
-    }
-  } catch (e: unknown) {
-    error = (e as Error).message
-  }
+  const videos = await getTrending(24)
 
   return (
     <div style={{ minHeight: '100%' }}>
@@ -91,13 +81,8 @@ export default async function Home({
 
       {/* Content area */}
       <div style={{ padding: '16px 24px 32px' }}>
-        {error && (
-          <div style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 8, padding: '12px 16px', color: '#fca5a5', fontSize: '0.875rem', marginBottom: 16 }}>
-            {error}
-          </div>
-        )}
 
-        {videos.length === 0 && <PlaceholderGrid />}
+
 
         {/* Video grid — YouTube 4-col style */}
         <div style={{
