@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import YTNavbar from '@/components/YTNavbar'
 import YTSidebar from '@/components/YTSidebar'
+import FloatingChatWrapper from '@/components/FloatingChatWrapper'
 
 export const metadata: Metadata = {
   title: 'YT Portal — Trending YouTube Videos by Topic',
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
         </div>
+        <FloatingChatWrapper />
       </body>
     </html>
   )
