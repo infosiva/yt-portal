@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'YT Portal — Trending YouTube Videos by Topic',
   description: 'Discover trending YouTube videos curated by topic. Tech, gaming, music, news and more — updated daily.',
   keywords: ['trending videos', 'YouTube', 'curated videos', 'tech videos', 'gaming videos'],
-  metadataBase: new URL('https://yt-portal.vercel.app'),
+  metadataBase: new URL('https://yt-portal.app'),
   openGraph: { title: 'YT Portal — Trending YouTube Videos', description: 'Trending YouTube videos curated by topic.', type: 'website', locale: 'en_GB', siteName: 'YT Portal' },
   twitter: { card: 'summary_large_image', title: 'YT Portal', description: 'Trending YouTube videos by topic.' },
   robots: { index: true, follow: true },
