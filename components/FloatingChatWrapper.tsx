@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 export default function FloatingChatWrapper() {
   const [open, setOpen] = useState(false)
   const [msgs, setMsgs] = useState<{ role: 'user' | 'bot'; text: string }[]>([
-    { role: 'bot', text: 'Hi! Looking for YouTube channels or want to understand trends? 📺' },
+    { role: 'bot', text: 'What niche or topic do you want to dominate on YouTube? I\'ll find the content gap and tell you exactly what to make. 🎯' },
   ])
   const [input, setInput] = useState('')
 
@@ -66,7 +66,7 @@ export default function FloatingChatWrapper() {
             <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(255,0,0,0.3)', display: 'flex', gap: 8 }}>
               <input value={input} onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && send()}
-                placeholder='Ask about channels or trends…'
+                placeholder='Niche, topic, or video idea…'
                 style={{ flex: 1, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,0,0,0.3)',
                   borderRadius: 8, padding: '6px 10px', fontSize: 12, color: '#f8fafc', outline: 'none' }} />
               <button onClick={send}

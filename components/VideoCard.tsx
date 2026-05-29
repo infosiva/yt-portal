@@ -29,12 +29,22 @@ function ChannelAvatar({ name }: { name: string }) {
   )
 }
 
-export default function VideoCard({ video, featured = false }: { video: YTVideo; featured?: boolean }) {
+function viralScore(viewCount: string, publishedAt: string): { label: string; color: string } | null {
+  const views = parseInt(viewCount) || 0
+  const ageHours = (Date.now() - new Date(publishedAt).getTime()) / 3_600_000
+  const velocityPerHour = ageHours > 0 ? views / ageHours : 0
+  if (velocityPerHour > 50000) return { label: '🚀 Exploding', color: '#ff4444' }
+  if (velocityPerHour > 10000) return { label: '📈 Trending', color: '#f59e0b' }
+  if (velocityPerHour > 2000)  return { label: '⚡ Rising', color: '#34d399' }
+  return null
+}
+
+export default function VideoCard({ video, featured = false, rank }: { video: YTVideo; featured?: boolean; rank?: number }) {
   const [imgSrc, setImgSrc] = useState(video.thumbnail)
   const fallback = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
   const [hovered, setHovered] = useState(false)
+  const score = viralScore(video.viewCount, video.publishedAt)
 
-  // featured prop kept for backwards compat with watch page — renders same card style
   void featured
 
   return (
@@ -65,6 +75,26 @@ export default function VideoCard({ video, featured = false }: { video: YTVideo;
           onError={() => { if (imgSrc !== fallback) setImgSrc(fallback) }}
           style={{ transform: hovered ? 'scale(1.03)' : 'scale(1)', transition: 'transform 0.3s' }}
         />
+
+        {/* Rank badge for featured row */}
+        {rank && (
+          <span style={{
+            position: 'absolute', top: 8, left: 8,
+            background: rank === 1 ? '#ff0000' : 'rgba(0,0,0,0.8)',
+            color: '#fff', fontSize: '0.7rem', fontWeight: 800,
+            padding: '2px 7px', borderRadius: 4, letterSpacing: '0.04em',
+          }}>#{rank}</span>
+        )}
+
+        {/* Viral velocity badge */}
+        {score && (
+          <span style={{
+            position: 'absolute', top: 8, right: 8,
+            background: 'rgba(0,0,0,0.85)', color: score.color,
+            fontSize: '0.68rem', fontWeight: 700,
+            padding: '2px 7px', borderRadius: 4,
+          }}>{score.label}</span>
+        )}
 
         {/* Duration */}
         {video.duration && (

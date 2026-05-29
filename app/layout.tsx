@@ -6,12 +6,25 @@ import YTSidebar from '@/components/YTSidebar'
 import FloatingChatWrapper from '@/components/FloatingChatWrapper'
 
 export const metadata: Metadata = {
-  title: 'YT Portal — Trending YouTube Videos by Topic',
-  description: 'Discover trending YouTube videos curated by topic. Tech, gaming, music, news and more — updated daily.',
-  keywords: ['trending videos', 'YouTube', 'curated videos', 'tech videos', 'gaming videos'],
+  title: 'YT Portal — Viral YouTube Videos Trending Right Now',
+  description: 'Discover what\'s blowing up on YouTube before everyone else. Trending videos in AI, tech, finance, gaming, and more — curated by topic and updated every 30 minutes.',
+  keywords: [
+    'trending YouTube videos', 'viral videos today', 'best YouTube channels 2026',
+    'what to watch on YouTube', 'YouTube trending now', 'AI videos', 'tech YouTube',
+    'most watched videos', 'YouTube discovery', 'creator tools', 'video growth',
+    'YouTube SEO', 'viral content', 'binge-worthy videos',
+  ],
   metadataBase: new URL('https://yt-portal.app'),
-  openGraph: { title: 'YT Portal — Trending YouTube Videos', description: 'Trending YouTube videos curated by topic.', type: 'website', locale: 'en_GB', siteName: 'YT Portal' },
-  twitter: { card: 'summary_large_image', title: 'YT Portal', description: 'Trending YouTube videos by topic.' },
+  openGraph: {
+    title: 'YT Portal — Viral YouTube Videos Trending Right Now',
+    description: 'What\'s blowing up on YouTube before everyone else. Trending videos in AI, tech, finance, gaming and more.',
+    type: 'website', locale: 'en_GB', siteName: 'YT Portal',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'YT Portal — Viral YouTube Videos Trending Right Now',
+    description: 'Discover what\'s blowing up on YouTube. Curated trending videos by topic, updated every 30 minutes.',
+  },
   robots: { index: true, follow: true },
 }
 

@@ -81,11 +81,16 @@ export default async function WatchPage({
             )}
           </div>
 
-          {/* Related */}
+          {/* Related — binge-loop */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-1 h-5 bg-red-500 rounded-full" />
-              <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">Up Next</h2>
+            <div style={{ background: 'rgba(255,0,0,0.06)', border: '1px solid rgba(255,0,0,0.15)', borderRadius: 10, padding: '10px 14px', marginBottom: 8 }}>
+              <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
+                <div className="w-1 h-4 bg-red-500 rounded-full" />
+                <h2 className="text-sm font-bold text-white uppercase tracking-wider">Up Next</h2>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>
+                Don&apos;t stop here — these videos complete the picture. Watch next to finish what this one started.
+              </p>
             </div>
             <div className="space-y-4">
               {related.map(v => (
