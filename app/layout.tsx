@@ -6,8 +6,8 @@ import YTSidebar from '@/components/YTSidebar'
 import FloatingChatWrapper from '@/components/FloatingChatWrapper'
 
 export const metadata: Metadata = {
-  title: 'YT Portal — Viral YouTube Videos Trending Right Now',
-  description: 'Discover what\'s blowing up on YouTube before everyone else. Trending videos in AI, tech, finance, gaming, and more — curated by topic and updated every 30 minutes.',
+  title: 'YT Portal — YouTube Growth on Autopilot. Video Ideas, Scripts & SEO.',
+  description: 'Tell AI your channel niche — get video ideas, SEO titles, scripts, and thumbnail concepts in under a minute. Trending videos updated every 30 minutes.',
   keywords: [
     'trending YouTube videos', 'viral videos today', 'best YouTube channels 2026',
     'what to watch on YouTube', 'YouTube trending now', 'AI videos', 'tech YouTube',

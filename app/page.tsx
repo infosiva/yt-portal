@@ -1,5 +1,6 @@
 import { getTrending } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
+import NicheToolBar from '@/components/NicheToolBar'
 
 const CHIPS = [
   { label: 'All', query: '' },
@@ -41,6 +42,9 @@ export default async function Home({
         <style>{`@keyframes blobDrift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-20px) scale(1.08)}}
           @keyframes blobDrift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,20px) scale(1.06)}}`}</style>
       </div>
+
+      {/* Niche tool bar — channel-growth CTA */}
+      <NicheToolBar />
 
       {/* Hook banner — retention-first value prop */}
       <div style={{
