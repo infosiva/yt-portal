@@ -12,7 +12,7 @@ export default function NotFound() {
         gap: 16,
         padding: '40px 16px',
         textAlign: 'center',
-        background: '#060610',
+        background: '#0a0a0a',
       }}
     >
       <div

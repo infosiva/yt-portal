@@ -12,7 +12,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 
 export default function PrivacyPage() {
   return (
-    <main style={{ maxWidth: 760, margin: '0 auto', padding: '60px 24px 80px', background: '#060610', minHeight: '100vh' }}>
+    <main style={{ maxWidth: 760, margin: '0 auto', padding: '60px 24px 80px', background: '#0a0a0a', minHeight: '100vh' }}>
       <h1 style={{ fontSize: 32, fontWeight: 900, color: '#f9fafb', marginBottom: 8 }}>Privacy Policy</h1>
       <p style={{ color: '#6b7280', marginBottom: 48, fontSize: 14 }}>Last updated: June 2026</p>
       <Section title="Data We Collect">
