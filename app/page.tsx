@@ -43,6 +43,11 @@ export default async function Home({
           @keyframes blobDrift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,20px) scale(1.06)}}`}</style>
       </div>
 
+      {/* SEO H1 — visually hidden, descriptive for screen readers + search */}
+      <h1 style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+        YT Portal — Trending YouTube Videos. AI, Tech, Finance, Gaming &amp; More.
+      </h1>
+
       {/* Niche tool bar — channel-growth CTA */}
       <NicheToolBar />
 
