@@ -5,8 +5,8 @@
    via CSS vars injected in layout.tsx
 ───────────────────────────────────────── */
 :root {
-  --background: #0a0a0a;
-  --surface-1:  #0c0c18;
+  --background: #0a0a0f;
+  --surface-1:  #0d0d1a;
   --surface-2:  #111120;
   --foreground: #ededf0;
   --text-2:     #8e8ea0;
@@ -28,7 +28,7 @@
   /* Theme vars — injected by layout.tsx */
   --theme-primary:   #ef4444;
   --theme-secondary: #f87171;
-  --theme-base:      #0a0a0a;
+  --theme-base:      #0a0a0f;
 }
 
 /* ─────────────────────────────────────────
