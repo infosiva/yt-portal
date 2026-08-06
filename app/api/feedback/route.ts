@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chat = process.env.TELEGRAM_CHAT_ID
-  if (token && chat) {
+  if (token && chat && process.env.TELEGRAM_NOTIFICATIONS_DISABLED !== 'true') {
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

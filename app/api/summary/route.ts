@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { callAI } from '@/lib/ai'
+import { AI_LIMITER } from '@/lib/rateLimit'
 
 const SYSTEM = `You are a concise video summarizer. Given a YouTube video title, channel, and description, produce:
 1. A 2-sentence plain-English summary of what the video covers
@@ -14,6 +15,8 @@ Respond in this exact JSON format:
 }`
 
 export async function POST(req: NextRequest) {
+  const limited = AI_LIMITER.check(req); if (limited) return limited
+
   try {
     const { title, channel, description } = await req.json()
     if (!title) return NextResponse.json({ error: 'title required' }, { status: 400 })
