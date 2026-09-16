@@ -35,6 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="google-adsense-account" content="ca-pub-4237294630161176" />
+        <Script
+                  async
+                  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237294630161176"
+                  crossOrigin="anonymous"
+                  strategy="afterInteractive"
+                />
         <style>{`
           body { background: #0f0f0f; margin: 0; }
           .yt-nav-link:hover { background: rgba(255,255,255,0.1) !important; }
