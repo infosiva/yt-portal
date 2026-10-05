@@ -1,5 +1,6 @@
 import { getTrending } from '@/lib/youtube'
 import VideoCard from '@/components/VideoCard'
+import { SpotlightCard } from '@infosiva/shared-ui/modern'
 import NicheToolBar from '@/components/NicheToolBar'
 
 const CHIPS = [
@@ -133,7 +134,7 @@ export default async function Home({
               gap: '16px',
             }}>
               {featured.map((v, i) => (
-                <VideoCard key={v.id} video={v} rank={i + 1} />
+                <SpotlightCard key={v.id}><VideoCard video={v} rank={i + 1} /></SpotlightCard>
               ))}
             </div>
           </div>

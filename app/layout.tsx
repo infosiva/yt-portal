@@ -6,6 +6,7 @@ import YTSidebar from '@/components/YTSidebar'
 import FloatingChatWrapper from '@/components/FloatingChatWrapper'
 import FeedbackWidget from '@/components/FeedbackWidget'
 
+import { MotionProvider } from "@infosiva/shared-ui/modern";
 export const metadata: Metadata = {
   title: 'YT Portal — YouTube Growth on Autopilot. Video Ideas, Scripts & SEO.',
   description: 'Tell AI your channel niche — get video ideas, SEO titles, scripts, and thumbnail concepts in under a minute. Trending videos updated every 30 minutes.',
@@ -59,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ display: 'flex', paddingTop: 56, minHeight: 'calc(100vh - 56px)' }}>
           <YTSidebar />
           <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden' }}>
-            {children}
+            <MotionProvider>{children}</MotionProvider>
           </main>
         </div>
         <FloatingChatWrapper />
