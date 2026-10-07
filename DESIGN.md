@@ -148,3 +148,6 @@ Use CSS grid with named areas. Featured card = large image + overlay text. Categ
 ---
 
 *Generated: 2026-05-07 by design-pipeline.ts*
+
+## AI platform (ai-core)
+No ai-core yet. Exemption: AI is trending-video summarisation and a scoped chatbot via the free-tier chain; no document upload, RAG or memory. Adopt ai-core if retrieval is added.
