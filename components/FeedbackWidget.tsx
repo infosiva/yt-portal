@@ -89,7 +89,7 @@ export default function FeedbackWidget() {
             fontSize: 13, fontWeight: 700, color: '#fff',
             display: 'flex', alignItems: 'center', gap: 8,
           }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#ff0000', display: 'inline-block' }} />
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#ff5a36', display: 'inline-block' }} />
             Share feedback
           </div>
 
@@ -113,7 +113,7 @@ export default function FeedbackWidget() {
                       onMouseLeave={() => setHoverRating(0)}
                       style={{
                         fontSize: 22, background: 'none', border: 'none', cursor: 'pointer', padding: 2,
-                        color: n <= (hoverRating || rating) ? '#ff4444' : 'rgba(255,255,255,0.2)',
+                        color: n <= (hoverRating || rating) ? '#ff5a36' : 'rgba(255,255,255,0.2)',
                         transition: 'color 100ms ease, transform 100ms ease',
                         transform: n <= (hoverRating || rating) ? 'scale(1.15)' : 'scale(1)',
                       }}
@@ -135,9 +135,9 @@ export default function FeedbackWidget() {
                       onClick={() => setType(t)}
                       style={{
                         padding: '4px 10px', borderRadius: 999, fontSize: 11, fontWeight: 600, cursor: 'pointer',
-                        background: type === t ? 'rgba(255,0,0,0.2)' : 'rgba(255,255,255,0.08)',
-                        border: `1px solid ${type === t ? 'rgba(255,68,68,0.5)' : 'rgba(255,255,255,0.12)'}`,
-                        color: type === t ? '#ff6666' : 'rgba(255,255,255,0.6)',
+                        background: type === t ? 'rgba(255,90,54,0.2)' : 'rgba(255,255,255,0.08)',
+                        border: `1px solid ${type === t ? 'rgba(255,90,54,0.5)' : 'rgba(255,255,255,0.12)'}`,
+                        color: type === t ? '#ff8a70' : 'rgba(255,255,255,0.6)',
                         transition: 'all 120ms ease',
                       }}
                     >
@@ -179,7 +179,7 @@ export default function FeedbackWidget() {
               </div>
 
               {error && (
-                <div style={{ fontSize: 11, color: '#ff6666', background: 'rgba(255,0,0,0.1)', borderRadius: 6, padding: '6px 10px' }}>
+                <div style={{ fontSize: 11, color: '#ff8a70', background: 'rgba(255,90,54,0.1)', borderRadius: 6, padding: '6px 10px' }}>
                   {error}
                 </div>
               )}
@@ -188,7 +188,7 @@ export default function FeedbackWidget() {
                 onClick={submit}
                 disabled={loading}
                 style={{
-                  background: '#ff0000', border: 'none', borderRadius: 8, padding: '9px 0',
+                  background: '#ff5a36', border: 'none', borderRadius: 8, padding: '9px 0',
                   fontSize: 13, fontWeight: 700, color: '#fff', cursor: loading ? 'not-allowed' : 'pointer',
                   opacity: loading ? 0.65 : 1, width: '100%',
                   transition: 'opacity 150ms ease, transform 100ms ease',

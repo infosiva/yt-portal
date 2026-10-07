@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Logo from '@/components/Logo'
 
 export default function YTNavbar() {
   const [query, setQuery] = useState('')
@@ -16,18 +17,12 @@ export default function YTNavbar() {
 
   return (
     <header
-      style={{ background: '#0f0f0f', borderBottom: '1px solid rgba(255,255,255,0.1)' }}
+      style={{ background: '#0e0e10', borderBottom: '1px solid rgba(255,255,255,0.1)' }}
       className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-4 gap-4"
     >
       {/* Left — Logo */}
-      <Link href="/" className="flex items-center gap-1.5 shrink-0 group">
-        <svg width="28" height="20" viewBox="0 0 90 64" fill="none" aria-hidden>
-          <rect width="90" height="64" rx="14" fill="#FF0000"/>
-          <path d="M36 18l28 14-28 14V18z" fill="white"/>
-        </svg>
-        <span style={{ color: '#fff', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.02em', fontFamily: 'system-ui,sans-serif' }}>
-          YT<span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>Portal</span>
-        </span>
+      <Link href="/" aria-label="YTPortal home" className="flex items-center gap-1.5 shrink-0 group" style={{ minHeight: 44 }}>
+<Logo />
       </Link>
 
       {/* Center — Search */}
@@ -139,11 +134,11 @@ export default function YTNavbar() {
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
           </svg>
-          <span style={{ position: 'absolute', top: 6, right: 6, width: 8, height: 8, borderRadius: '50%', background: '#ff0000', border: '1.5px solid #0f0f0f' }} />
+          <span style={{ position: 'absolute', top: 6, right: 6, width: 8, height: 8, borderRadius: '50%', background: '#ff5a36', border: '1.5px solid #0e0e10' }} />
         </button>
         {/* Avatar */}
         <div
-          style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg,#ff0000,#ff4444)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: 4, cursor: 'pointer' }}
+          style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg,#ff5a36,#ff5a36)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginLeft: 4, cursor: 'pointer' }}
           aria-label="Account"
         >
           <span style={{ color: 'white', fontSize: '0.75rem', fontWeight: 700 }}>YP</span>

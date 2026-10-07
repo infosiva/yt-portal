@@ -28,7 +28,7 @@ export default function NicheToolBar() {
 
   return (
     <div style={{
-      background: 'linear-gradient(180deg, rgba(255,0,0,0.07) 0%, rgba(0,0,0,0) 100%)',
+      background: 'linear-gradient(180deg, rgba(255,90,54,0.07) 0%, rgba(0,0,0,0) 100%)',
       borderBottom: '1px solid rgba(255,255,255,0.07)',
       padding: '20px 24px 16px',
     }}>
@@ -61,7 +61,7 @@ export default function NicheToolBar() {
             outline: 'none',
             transition: 'border-color 0.15s',
           }}
-          onFocus={e => (e.target.style.borderColor = 'rgba(255,68,68,0.5)')}
+          onFocus={e => (e.target.style.borderColor = 'rgba(255,90,54,0.5)')}
           onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.14)')}
         />
 
@@ -77,8 +77,8 @@ export default function NicheToolBar() {
                   display: 'flex', alignItems: 'center', gap: 5,
                   padding: '7px 12px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 600,
                   cursor: 'pointer', transition: 'all 0.12s',
-                  background: active ? 'rgba(255,68,68,0.2)' : 'rgba(255,255,255,0.07)',
-                  border: active ? '1px solid rgba(255,68,68,0.5)' : '1px solid rgba(255,255,255,0.12)',
+                  background: active ? 'rgba(255,90,54,0.2)' : 'rgba(255,255,255,0.07)',
+                  border: active ? '1px solid rgba(255,90,54,0.5)' : '1px solid rgba(255,255,255,0.12)',
                   color: active ? '#ff8888' : 'rgba(255,255,255,0.65)',
                 }}
               >
@@ -95,7 +95,7 @@ export default function NicheToolBar() {
           style={{
             padding: '9px 20px', borderRadius: 10, fontSize: '0.85rem', fontWeight: 700,
             cursor: niche.trim() ? 'pointer' : 'not-allowed',
-            background: niche.trim() ? 'linear-gradient(135deg, #ff0000, #cc0000)' : 'rgba(255,255,255,0.08)',
+            background: niche.trim() ? 'linear-gradient(135deg, #ff5a36, #cc0000)' : 'rgba(255,255,255,0.08)',
             color: '#fff', border: 'none', transition: 'all 0.15s',
             transform: 'scale(1)',
             opacity: niche.trim() ? 1 : 0.5,

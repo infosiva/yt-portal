@@ -5,7 +5,7 @@ export const metadata = {
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section style={{ marginBottom: 32 }}>
-    <h2 style={{ fontSize: 20, fontWeight: 700, color: '#ef4444', marginBottom: 12 }}>{title}</h2>
+    <h2 style={{ fontSize: 20, fontWeight: 700, color: '#ff5a36', marginBottom: 12 }}>{title}</h2>
     <div style={{ color: '#d1d5db', lineHeight: 1.7, fontSize: 15 }}>{children}</div>
   </section>
 )
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
         <p>Search queries and video URLs are not retained after your session. We do not maintain a database of user activity or browsing history.</p>
       </Section>
       <Section title="Your Rights">
-        <p>Email <a href="mailto:privacy@yt-portal.app" style={{ color: '#ef4444' }}>privacy@yt-portal.app</a> to request deletion of any data we hold about you, or to ask questions about data handling.</p>
+        <p>Email <a href="mailto:privacy@yt-portal.app" style={{ color: '#ff5a36' }}>privacy@yt-portal.app</a> to request deletion of any data we hold about you, or to ask questions about data handling.</p>
       </Section>
       <Section title="Children&apos;s Privacy">
         <p>This service is not directed at children under 13. We do not knowingly collect data from minors. If you believe a minor has submitted data, contact us immediately.</p>
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
         <p>We may update this policy periodically. Continued use of YT Portal after changes constitutes acceptance of the updated policy.</p>
       </Section>
       <Section title="Contact">
-        <p>Questions? Email <a href="mailto:privacy@yt-portal.app" style={{ color: '#ef4444' }}>privacy@yt-portal.app</a></p>
+        <p>Questions? Email <a href="mailto:privacy@yt-portal.app" style={{ color: '#ff5a36' }}>privacy@yt-portal.app</a></p>
       </Section>
     </main>
   )

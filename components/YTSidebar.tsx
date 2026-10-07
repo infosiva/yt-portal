@@ -51,7 +51,7 @@ export default function YTSidebar() {
       style={{
         width: 240,
         minWidth: 240,
-        background: '#0f0f0f',
+        background: '#0e0e10',
         height: 'calc(100vh - 56px)',
         position: 'sticky',
         top: 56,

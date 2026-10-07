@@ -34,7 +34,7 @@ export default function Terms() {
         </p>
       </section>
 
-      <Link href="/" style={{ color: '#ff4444', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+      <Link href="/" style={{ color: '#ff5a36', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
         ← Back to YT Portal
       </Link>
     </main>

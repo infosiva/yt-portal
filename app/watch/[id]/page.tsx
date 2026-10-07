@@ -83,7 +83,7 @@ export default async function WatchPage({
 
           {/* Related — binge-loop */}
           <div className="space-y-4">
-            <div style={{ background: 'rgba(255,0,0,0.06)', border: '1px solid rgba(255,0,0,0.15)', borderRadius: 10, padding: '10px 14px', marginBottom: 8 }}>
+            <div style={{ background: 'rgba(255,90,54,0.06)', border: '1px solid rgba(255,90,54,0.15)', borderRadius: 10, padding: '10px 14px', marginBottom: 8 }}>
               <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
                 <div className="w-1 h-4 bg-red-500 rounded-full" />
                 <h2 className="text-sm font-bold text-white uppercase tracking-wider">Up Next</h2>

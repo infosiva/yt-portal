@@ -32,7 +32,7 @@ const PROMPTS = [
   {
     id: 4,
     tag: 'Retention',
-    tagColor: '#dc2626',
+    tagColor: '#e0431f',
     title: 'Binge-Loop Session-Time Expander',
     desc: 'Connect two videos into an unbreakable binge loop with a 20-sec end-screen script.',
     placeholders: ['Topic A', 'Topic B'],
@@ -151,7 +151,7 @@ function PromptCard({ prompt }: { prompt: typeof PROMPTS[0] }) {
                   borderRadius: 8, padding: '7px 10px', fontSize: '0.8rem', color: '#fff', outline: 'none',
                   transition: 'border-color 0.15s',
                 }}
-                onFocus={e => (e.target.style.borderColor = 'rgba(255,0,0,0.5)')}
+                onFocus={e => (e.target.style.borderColor = 'rgba(255,90,54,0.5)')}
                 onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
               />
             </div>
@@ -177,7 +177,7 @@ function PromptCard({ prompt }: { prompt: typeof PROMPTS[0] }) {
           background: copied
             ? 'rgba(5,150,105,0.2)'
             : allFilled
-              ? 'linear-gradient(135deg,#ff0000,#cc0000)'
+              ? 'linear-gradient(135deg,#ff5a36,#cc0000)'
               : 'rgba(255,255,255,0.08)',
           border: copied ? '1px solid rgba(5,150,105,0.4)' : '1px solid transparent',
           borderRadius: 8, padding: '8px 16px', fontSize: '0.8rem', fontWeight: 600,
@@ -224,7 +224,7 @@ export default function CreatorToolsPage() {
             padding: '5px 14px', borderRadius: 20, fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
             border: '1px solid transparent', transition: 'all 0.12s',
             background: !filter ? '#fff' : 'rgba(255,255,255,0.08)',
-            color: !filter ? '#0f0f0f' : 'rgba(255,255,255,0.75)',
+            color: !filter ? '#0e0e10' : 'rgba(255,255,255,0.75)',
           }}
         >All</button>
         {tags.map(tag => {
@@ -257,7 +257,7 @@ export default function CreatorToolsPage() {
       {/* How to use */}
       <div style={{
         marginTop: 40, padding: '20px 24px',
-        background: 'rgba(255,0,0,0.06)', border: '1px solid rgba(255,0,0,0.2)',
+        background: 'rgba(255,90,54,0.06)', border: '1px solid rgba(255,90,54,0.2)',
         borderRadius: 14,
       }}>
         <p style={{ margin: '0 0 8px', fontSize: '0.85rem', fontWeight: 700, color: 'rgba(255,255,255,0.9)' }}>

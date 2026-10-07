@@ -33,7 +33,7 @@ function viralScore(viewCount: string, publishedAt: string): { label: string; co
   const views = parseInt(viewCount) || 0
   const ageHours = (Date.now() - new Date(publishedAt).getTime()) / 3_600_000
   const velocityPerHour = ageHours > 0 ? views / ageHours : 0
-  if (velocityPerHour > 50000) return { label: '🚀 Exploding', color: '#ff4444' }
+  if (velocityPerHour > 50000) return { label: '🚀 Exploding', color: '#ff5a36' }
   if (velocityPerHour > 10000) return { label: '📈 Trending', color: '#f59e0b' }
   if (velocityPerHour > 2000)  return { label: '⚡ Rising', color: '#34d399' }
   return null
@@ -80,7 +80,7 @@ export default function VideoCard({ video, featured = false, rank }: { video: YT
         {rank && (
           <span style={{
             position: 'absolute', top: 8, left: 8,
-            background: rank === 1 ? '#ff0000' : 'rgba(0,0,0,0.8)',
+            background: rank === 1 ? '#ff5a36' : 'rgba(0,0,0,0.8)',
             color: '#fff', fontSize: '0.7rem', fontWeight: 800,
             padding: '2px 7px', borderRadius: 4, letterSpacing: '0.04em',
           }}>#{rank}</span>

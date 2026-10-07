@@ -35,10 +35,10 @@ export default async function Home({
       {/* Animated blob bg */}
       <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }} aria-hidden>
         <div style={{ position: 'absolute', top: '-15%', left: '-8%', width: 600, height: 600, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,0,0,0.12) 0%, transparent 70%)', filter: 'blur(80px)',
+          background: 'radial-gradient(circle, rgba(255,90,54,0.12) 0%, transparent 70%)', filter: 'blur(80px)',
           animation: 'blobDrift1 14s ease-in-out infinite' }} />
         <div style={{ position: 'absolute', bottom: '-10%', right: '-6%', width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(180,0,0,0.08) 0%, transparent 70%)', filter: 'blur(90px)',
+          background: 'radial-gradient(circle, rgba(200,70,40,0.08) 0%, transparent 70%)', filter: 'blur(90px)',
           animation: 'blobDrift2 18s ease-in-out infinite' }} />
         <style>{`@keyframes blobDrift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-20px) scale(1.08)}}
           @keyframes blobDrift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,20px) scale(1.06)}}`}</style>
@@ -54,25 +54,26 @@ export default async function Home({
 
       {/* Hook banner — retention-first value prop */}
       <div style={{
-        background: 'linear-gradient(90deg, rgba(255,0,0,0.15) 0%, rgba(0,0,0,0) 100%)',
-        borderBottom: '1px solid rgba(255,0,0,0.15)',
+        background: 'linear-gradient(90deg, rgba(255,90,54,0.15) 0%, rgba(0,0,0,0) 100%)',
+        borderBottom: '1px solid rgba(255,90,54,0.15)',
         padding: '10px 24px',
         display: 'flex',
+        flexWrap: 'wrap',
         alignItems: 'center',
         gap: 12,
       }}>
-        <span style={{ fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ff4444' }}>
+        <span style={{ fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#ff5a36' }}>
           LIVE TRENDING
         </span>
         <span style={{ width: 1, height: 14, background: 'rgba(255,255,255,0.15)' }} />
         <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
-          Curated from YouTube's top 100 — updated every 30 min
+          Trending on YouTube, cached up to 30 min. Shows a curated set if live data is unavailable.
         </span>
         <a href="/creator-tools" style={{
-          marginLeft: 'auto', fontSize: '0.75rem', fontWeight: 600, color: '#ff4444',
+          marginLeft: 'auto', fontSize: '0.75rem', fontWeight: 600, color: '#ff5a36',
           textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4,
-          padding: '4px 10px', borderRadius: 6, border: '1px solid rgba(255,68,68,0.3)',
-          background: 'rgba(255,68,68,0.08)', whiteSpace: 'nowrap',
+          padding: '0 12px', minHeight: 44, borderRadius: 6, border: '1px solid rgba(255,90,54,0.3)',
+          background: 'rgba(255,90,54,0.08)', whiteSpace: 'nowrap',
         }}>
           🎯 Grow your channel →
         </a>
@@ -80,7 +81,7 @@ export default async function Home({
 
       {/* Sticky category chips */}
       <div style={{
-        position: 'sticky', top: 56, zIndex: 40, background: '#0f0f0f',
+        position: 'sticky', top: 56, zIndex: 40, background: '#0e0e10',
         borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '12px 24px',
       }}>
         <div className="scrollbar-hide" style={{ display: 'flex', gap: 8, overflowX: 'auto', alignItems: 'center' }}>
@@ -90,8 +91,8 @@ export default async function Home({
                 <a key={c.label} href="/creator-tools" style={{
                   flexShrink: 0, padding: '6px 14px', borderRadius: 8, fontSize: '0.875rem',
                   fontWeight: 600, whiteSpace: 'nowrap', textDecoration: 'none',
-                  background: 'rgba(255,0,0,0.15)', color: '#ff6666',
-                  border: '1px solid rgba(255,0,0,0.25)', transition: 'all 0.15s',
+                  background: 'rgba(255,90,54,0.15)', color: '#ff8a70',
+                  border: '1px solid rgba(255,90,54,0.25)', transition: 'all 0.15s',
                 }}>{c.label}</a>
               )
             }
@@ -105,7 +106,7 @@ export default async function Home({
                   fontWeight: 500, whiteSpace: 'nowrap', textDecoration: 'none',
                   transition: 'all 0.15s',
                   background: isActive ? '#fff' : 'rgba(255,255,255,0.1)',
-                  color: isActive ? '#0f0f0f' : 'rgba(255,255,255,0.87)',
+                  color: isActive ? '#0e0e10' : 'rgba(255,255,255,0.87)',
                 }}
               >
                 {c.label}
@@ -122,7 +123,7 @@ export default async function Home({
         {featured.length > 0 && (
           <div style={{ marginBottom: 28 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <span style={{ width: 3, height: 18, background: '#ff0000', borderRadius: 2, display: 'block' }} />
+              <span style={{ width: 3, height: 18, background: '#ff5a36', borderRadius: 2, display: 'block' }} />
               <span style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>
                 Trending Now
               </span>

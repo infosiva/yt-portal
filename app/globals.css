@@ -26,7 +26,7 @@
   --radius-xl: 1.5rem;
 
   /* Theme vars — injected by layout.tsx */
-  --theme-primary:   #ef4444;
+  --theme-primary:   #ff5a36;
   --theme-secondary: #f87171;
   --theme-base:      #0a0a0f;
 }
@@ -146,7 +146,7 @@ body {
   inset: 0;
   background: radial-gradient(
     600px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--theme-primary, #ef4444) 8%, transparent),
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 8%, transparent),
     transparent 60%
   );
   pointer-events: none;
@@ -218,8 +218,8 @@ body {
 @keyframes ping        { 75%, 100% { transform: scale(2.2); opacity: 0 } }
 @keyframes pulse       { 0%, 100% { opacity: 1 } 50% { opacity: 0.4 } }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px color-mix(in srgb, var(--theme-primary, #ef4444) 15%, transparent) }
-  50%       { box-shadow: 0 0 45px color-mix(in srgb, var(--theme-primary, #ef4444) 40%, transparent) }
+  0%, 100% { box-shadow: 0 0 20px color-mix(in srgb, var(--theme-primary, #ff5a36) 15%, transparent) }
+  50%       { box-shadow: 0 0 45px color-mix(in srgb, var(--theme-primary, #ff5a36) 40%, transparent) }
 }
 @keyframes blink {
   0%, 80%, 100% { opacity: 0 }
@@ -289,11 +289,11 @@ body {
 ::-webkit-scrollbar       { width: 5px }
 ::-webkit-scrollbar-track { background: transparent }
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--theme-primary, #ef4444) 40%, transparent);
+  background: color-mix(in srgb, var(--theme-primary, #ff5a36) 40%, transparent);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--theme-primary, #ef4444) 65%, transparent);
+  background: color-mix(in srgb, var(--theme-primary, #ff5a36) 65%, transparent);
 }
 
 /* ─────────────────────────────────────────
@@ -330,7 +330,7 @@ body {
 }
 .orb-1 {
   width: 600px; height: 600px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary, #ef4444) 18%, transparent), transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary, #ff5a36) 18%, transparent), transparent 70%);
   top: -200px; left: -100px;
   animation-duration: 14s;
 }
@@ -343,7 +343,7 @@ body {
 }
 .orb-3 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary, #ef4444) 10%, transparent), transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary, #ff5a36) 10%, transparent), transparent 70%);
   bottom: -100px; left: 30%;
   animation-duration: 22s;
   animation-delay: -10s;
@@ -394,13 +394,13 @@ body {
   gap: 6px;
   padding: 4px 12px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--theme-primary, #ef4444) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--theme-primary, #ef4444) 25%, transparent);
+  background: color-mix(in srgb, var(--theme-primary, #ff5a36) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-primary, #ff5a36) 25%, transparent);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--theme-secondary, #f87171);
-  box-shadow: 0 0 20px color-mix(in srgb, var(--theme-primary, #ef4444) 15%, transparent),
+  box-shadow: 0 0 20px color-mix(in srgb, var(--theme-primary, #ff5a36) 15%, transparent),
               inset 0 1px 0 rgb(255 255 255 / 0.08);
   transform-style: preserve-3d;
   animation: badgeFloat 3s ease-in-out infinite;
@@ -427,12 +427,12 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    color-mix(in srgb, var(--theme-primary, #ef4444) 50%, transparent) 30%,
-    color-mix(in srgb, var(--theme-primary, #ef4444) 70%, transparent) 50%,
-    color-mix(in srgb, var(--theme-primary, #ef4444) 50%, transparent) 70%,
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 50%, transparent) 30%,
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 70%, transparent) 50%,
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 50%, transparent) 70%,
     transparent 100%
   );
-  box-shadow: 0 0 12px color-mix(in srgb, var(--theme-primary, #ef4444) 40%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--theme-primary, #ff5a36) 40%, transparent);
 }
 
 /* ─────────────────────────────────────────
@@ -542,12 +542,12 @@ body {
   padding: 1px;
   background: conic-gradient(
     from var(--angle),
-    color-mix(in srgb, var(--theme-primary, #ef4444) 80%, transparent),
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 80%, transparent),
     #f87171,
     #38bdf8,
     #34d399,
     #fbbf24,
-    color-mix(in srgb, var(--theme-primary, #ef4444) 80%, transparent)
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 80%, transparent)
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -567,7 +567,7 @@ body {
   transform: translateY(-3px) scale(1.01);
   box-shadow:
     0 20px 60px -10px rgb(0 0 0 / 0.6),
-    0 0 40px color-mix(in srgb, var(--theme-primary, #ef4444) 20%, transparent),
+    0 0 40px color-mix(in srgb, var(--theme-primary, #ff5a36) 20%, transparent),
     inset 0 1px 0 rgb(255 255 255 / 0.15);
 }
 
@@ -583,7 +583,7 @@ body {
 }
 .liquid-blob-1 {
   width: 500px; height: 500px;
-  background: radial-gradient(circle, var(--theme-primary, #ef4444), #38bdf8 60%, transparent);
+  background: radial-gradient(circle, var(--theme-primary, #ff5a36), #38bdf8 60%, transparent);
   animation-delay: 0s, 0s;
 }
 .liquid-blob-2 {
@@ -594,7 +594,7 @@ body {
 }
 .liquid-blob-3 {
   width: 300px; height: 300px;
-  background: radial-gradient(circle, #fbbf24, var(--theme-primary, #ef4444) 60%, transparent);
+  background: radial-gradient(circle, #fbbf24, var(--theme-primary, #ff5a36) 60%, transparent);
   animation-delay: -8s, -5s;
   opacity: 0.10;
 }
@@ -679,12 +679,12 @@ body {
   transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease-out);
   background: linear-gradient(
     135deg,
-    var(--theme-primary, #ef4444),
-    color-mix(in srgb, var(--theme-primary, #ef4444) 70%, #38bdf8)
+    var(--theme-primary, #ff5a36),
+    color-mix(in srgb, var(--theme-primary, #ff5a36) 70%, #38bdf8)
   );
   color: white;
   border: 1px solid rgb(255 255 255 / 0.15);
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--theme-primary, #ef4444) 35%, transparent),
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--theme-primary, #ff5a36) 35%, transparent),
               inset 0 1px 0 rgb(255 255 255 / 0.2);
 }
 .btn-liquid::before {
@@ -698,7 +698,7 @@ body {
 .btn-liquid:hover::before { transform: translateX(100%) }
 .btn-liquid:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 16px 50px color-mix(in srgb, var(--theme-primary, #ef4444) 50%, transparent),
+  box-shadow: 0 16px 50px color-mix(in srgb, var(--theme-primary, #ff5a36) 50%, transparent),
               inset 0 1px 0 rgb(255 255 255 / 0.25);
 }
 .btn-liquid:active { transform: translateY(0) scale(0.98) }
@@ -709,3 +709,12 @@ body {
   overflow: hidden;
 }
 .section-liquid > * { position: relative; z-index: 1; }
+
+/* Hub-switchable archetype variants (<html data-layout>). Default look unchanged when no archetype is set. */
+[data-layout="magazine-editorial"],[data-layout="travel-magazine"],[data-layout="story-scroll"]{--layout-radius:4px;--hero-align:left}
+[data-layout="finance-terminal"],[data-layout="kanban-board"],[data-layout="saas-dashboard-landing"],[data-layout="tool-first-workbench"]{--layout-radius:6px;--hero-align:left}
+[data-layout="bento-showcase"],[data-layout="gamified-learning"],[data-layout="weekend-lifestyle"],[data-layout="hero-chat"]{--layout-radius:24px;--hero-align:center}
+[data-layout="directory-marketplace"],[data-layout="compare-pricing"],[data-layout="docs-knowledge"],[data-layout="compliance-authority"],[data-layout="career-portfolio"],[data-layout="map-first"],[data-layout="media-gallery"],[data-layout="marketing-calendar"]{--layout-radius:10px;--hero-align:left}
+[data-layout] [class*="card"]{border-radius:var(--layout-radius)}
+[data-layout] h1{text-align:var(--hero-align)}
+[data-layout="career-portfolio"] [class*="card"]{box-shadow:4px 4px 0 var(--border,rgba(255,255,255,.12))}

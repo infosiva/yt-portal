@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import { AnimatedBg } from '@/components/AnimatedBg'
+import ConsentBanner from '@/components/ConsentBanner'
 import YTNavbar from '@/components/YTNavbar'
 import YTSidebar from '@/components/YTSidebar'
 import FloatingChatWrapper from '@/components/FloatingChatWrapper'
 import FeedbackWidget from '@/components/FeedbackWidget'
+import { loadSiteTheme, buildThemeStyleTag, buildGa4Snippet } from '@/lib/theme-loader'
 
 import { MotionProvider } from "@infosiva/shared-ui/modern";
 export const metadata: Metadata = {
@@ -31,9 +34,12 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = await loadSiteTheme('yt-portal')
+  const themeCss = buildThemeStyleTag(theme, { background: '#0e0e10', primary: '#ff5a36' })
+  const ga4 = buildGa4Snippet(theme)
   return (
-    <html lang="en">
+    <html lang="en" data-layout={theme?.layout?.archetype ?? 'media-gallery'}>
       <head>
         <meta name="google-adsense-account" content="ca-pub-4237294630161176" />
         <Script
@@ -42,8 +48,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   crossOrigin="anonymous"
                   strategy="afterInteractive"
                 />
+        {themeCss && <style dangerouslySetInnerHTML={{ __html: themeCss }} />}
+        {ga4 && <script dangerouslySetInnerHTML={{ __html: ga4 }} />}
         <style>{`
-          body { background: #0f0f0f; margin: 0; }
+          body { background: var(--background, #0e0e10); margin: 0; }
           .yt-nav-link:hover { background: rgba(255,255,255,0.1) !important; }
           .scrollbar-hide::-webkit-scrollbar { display: none; }
           .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -55,7 +63,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "url": "https://yt-portal.app",
         })}} />
       </head>
-      <body style={{ background: '#0f0f0f', color: '#fff', fontFamily: 'Roboto,-apple-system,system-ui,sans-serif', minHeight: '100dvh' }}>
+      <body style={{ background: 'var(--background, #0e0e10)', color: '#fff', fontFamily: 'Roboto,-apple-system,system-ui,sans-serif', minHeight: '100dvh' }}>
+        <AnimatedBg theme={theme} />
+        <ConsentBanner />
         <YTNavbar />
         <div style={{ display: 'flex', paddingTop: 56, minHeight: 'calc(100vh - 56px)' }}>
           <YTSidebar />
@@ -65,7 +75,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <FloatingChatWrapper />
         <FeedbackWidget />
-        <Script defer data-site="yt-portal.vercel.app" src="http://31.97.56.148:3098/t.js" strategy="afterInteractive" />
       </body>
     </html>
   )
